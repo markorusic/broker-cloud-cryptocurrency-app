@@ -11,24 +11,24 @@ import { PRIMARY_COLOR } from './config/colors'
 import AuthLoadingScreen from './screens/AuthLoadingScreen'
 import SignInScreen from './screens/SignInScreen'
 
+const tabBarIcon = name => ({ tintColor }) => (
+  <Icon name={name} size={25} color={tintColor} />
+)
+
 const AppStack = createMaterialBottomTabNavigator(
   {
     Search: {
       screen: () => <Text>Market Search</Text>,
       navigationOptions: {
         tabBarLabel: 'Market Search',
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="view-list" size={25} color={tintColor} />
-        )
+        tabBarIcon: tabBarIcon('view-list')
       }
     },
     Favorites: {
       screen: () => <Text>Favorites</Text>,
       navigationOptions: {
         tabBarLabel: 'Favorites',
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="heart" size={25} color={tintColor} />
-        )
+        tabBarIcon: tabBarIcon('heart')
       }
     }
   },
