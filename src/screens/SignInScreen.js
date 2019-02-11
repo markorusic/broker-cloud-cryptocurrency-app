@@ -4,7 +4,7 @@ import ScreenContainer from 'app/shared/components/ScreenContainer'
 import TextField from 'app/shared/components/TextField'
 import Button from 'app/shared/components/Button'
 
-export default class SinginScreen extends Component {
+export default class SignInScreen extends Component {
   static navigationOptions = {
     header: null
   }

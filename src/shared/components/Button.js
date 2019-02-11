@@ -7,13 +7,13 @@ import { uppercase as uc } from 'app/shared/utils'
 export default function Button({
   title = '',
   style = {},
-  textStyle = {},
+  titleStyle = {},
   uppercase = false,
   ...props
 }) {
   return (
     <Ripple style={[styles.container, style]} {...props}>
-      <Text style={[styles.titleText, textStyle]}>
+      <Text style={[styles.titleText, titleStyle]}>
         {uppercase ? uc(title) : title}
       </Text>
     </Ripple>

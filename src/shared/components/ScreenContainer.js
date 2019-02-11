@@ -1,9 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
-export default function ScreenContainer({ children, style = {}, props }) {
+export default function ScreenContainer({
+  children = null,
+  style = {},
+  centered = false,
+  props
+}) {
   return (
-    <View style={[styles.container, style]} {...props}>
+    <View
+      style={[styles.container, centered ? styles.center : {}, style]}
+      {...props}
+    >
       {children}
     </View>
   )
@@ -12,7 +20,8 @@ export default function ScreenContainer({ children, style = {}, props }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-    // borderColor: 'red',
-    // borderWidth: 2
+  },
+  center: {
+    justifyContent: 'center'
   }
 })
