@@ -5,7 +5,7 @@ export default function ScreenContainer({
   children = null,
   style = {},
   centered = false,
-  props
+  ...props
 }) {
   return (
     <View

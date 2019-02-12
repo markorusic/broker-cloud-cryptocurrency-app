@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { View, Text } from 'react-native'
 
-export default class MarketSearchScreen extends Component {
+class MarketSearchScreen extends Component {
+  static navigationOptions = {
+    title: 'Market Search'
+  }
+
   render() {
     return (
       <View>
@@ -10,3 +14,5 @@ export default class MarketSearchScreen extends Component {
     )
   }
 }
+
+export default MarketSearchScreen
