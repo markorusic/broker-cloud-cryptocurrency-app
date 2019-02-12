@@ -6,10 +6,11 @@ import {
 } from 'react-navigation'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { Text } from 'react-native'
 import { PRIMARY_COLOR } from './config/colors'
-import AuthLoadingScreen from './screens/AuthLoadingScreen'
-import SignInScreen from './screens/SignInScreen'
+import AuthLoadingScreen from './modules/auth/screens/AuthLoadingScreen'
+import SignInScreen from './modules/auth/screens/SignInScreen'
+import MarketSearchScreen from './modules/market/screens/MarketSearchScreen'
+import FavoritesScreen from './modules/market/screens/FavoritesScreen'
 
 const tabBarIcon = name => ({ tintColor }) => (
   <Icon name={name} size={25} color={tintColor} />
@@ -18,14 +19,14 @@ const tabBarIcon = name => ({ tintColor }) => (
 const AppStack = createMaterialBottomTabNavigator(
   {
     Search: {
-      screen: () => <Text>Market Search</Text>,
+      screen: MarketSearchScreen,
       navigationOptions: {
         tabBarLabel: 'Market Search',
         tabBarIcon: tabBarIcon('view-list')
       }
     },
     Favorites: {
-      screen: () => <Text>Favorites</Text>,
+      screen: FavoritesScreen,
       navigationOptions: {
         tabBarLabel: 'Favorites',
         tabBarIcon: tabBarIcon('heart')
