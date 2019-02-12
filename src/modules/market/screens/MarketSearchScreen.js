@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { Container } from 'src/shared/components/ui'
+import MarketList from '../components/MarketList/MarketList'
 
 class MarketSearchScreen extends Component {
   static navigationOptions = {
@@ -8,9 +9,9 @@ class MarketSearchScreen extends Component {
 
   render() {
     return (
-      <View>
-        <Text> Market Search </Text>
-      </View>
+      <Container>
+        <MarketList />
+      </Container>
     )
   }
 }
