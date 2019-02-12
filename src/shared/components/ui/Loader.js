@@ -1,7 +1,7 @@
 import React from 'react'
 import { ActivityIndicator } from 'react-native'
-import { PRIMARY_COLOR } from 'app/config/colors'
+import { PRIMARY_COLOR } from 'src/config/colors'
 
-export default function Loader(props) {
+export function Loader(props) {
   return <ActivityIndicator size="large" color={PRIMARY_COLOR} {...props} />
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
-import ScreenContainer from 'app/shared/components/ScreenContainer'
-import Loader from 'app/shared/components/Loader'
+import ScreenContainer from 'src/shared/components/ScreenContainer'
+import { Loader } from 'src/shared/components/ui'
 
 export default class AuthLoadingScreen extends Component {
   componentDidMount = () => {

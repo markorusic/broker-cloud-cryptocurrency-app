@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 import Ripple from 'react-native-material-ripple'
-import { PRIMARY_COLOR } from 'app/config/colors'
-import { uppercase as uc } from 'app/shared/utils'
+import { PRIMARY_COLOR } from 'src/config/colors'
+import { uppercase as uc } from 'src/shared/utils'
 
-export default function Button({
+export function Button({
   title = '',
   style = {},
   titleStyle = {},

@@ -1,8 +1,8 @@
 import React from 'react'
 import { TextField as BaseTextField } from 'react-native-material-textfield'
-import { PRIMARY_COLOR, ERROR_COLOR } from 'app/config/colors'
+import { PRIMARY_COLOR, ERROR_COLOR } from 'src/config/colors'
 
-export default function TextField(props) {
+export function TextField(props) {
   return (
     <BaseTextField
       tintColor={PRIMARY_COLOR}

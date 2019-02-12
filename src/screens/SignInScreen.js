@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import ScreenContainer from 'app/shared/components/ScreenContainer'
-import TextField from 'app/shared/components/TextField'
-import Button from 'app/shared/components/Button'
+import ScreenContainer from 'src/shared/components/ScreenContainer'
+import { TextField, Button } from 'src/shared/components/ui'
 
 export default class SignInScreen extends Component {
   static navigationOptions = {
