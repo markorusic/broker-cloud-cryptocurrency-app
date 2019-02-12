@@ -33,6 +33,6 @@ const AppContainer = createAppContainer(
   })
 )
 
-export default function App() {
-  return <AppContainer />
-}
+const App = () => <AppContainer />
+
+export default App

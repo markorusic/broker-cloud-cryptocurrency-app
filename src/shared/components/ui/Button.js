@@ -4,21 +4,19 @@ import Ripple from 'react-native-material-ripple'
 import { PRIMARY_COLOR } from 'src/config/colors'
 import { uppercase as uc } from 'src/shared/utils'
 
-export function Button({
+export const Button = ({
   title = '',
   style = {},
   titleStyle = {},
   uppercase = false,
   ...props
-}) {
-  return (
-    <Ripple style={[styles.container, style]} {...props}>
-      <Text style={[styles.titleText, titleStyle]}>
-        {uppercase ? uc(title) : title}
-      </Text>
-    </Ripple>
-  )
-}
+}) => (
+  <Ripple style={[styles.container, style]} {...props}>
+    <Text style={[styles.titleText, titleStyle]}>
+      {uppercase ? uc(title) : title}
+    </Text>
+  </Ripple>
+)
 
 const styles = StyleSheet.create({
   container: {

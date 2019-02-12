@@ -1,21 +1,19 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
-export default function ScreenContainer({
+const ScreenContainer = ({
   children = null,
   style = {},
   centered = false,
   ...props
-}) {
-  return (
-    <View
-      style={[styles.container, centered ? styles.center : {}, style]}
-      {...props}
-    >
-      {children}
-    </View>
-  )
-}
+}) => (
+  <View
+    style={[styles.container, centered ? styles.center : {}, style]}
+    {...props}
+  >
+    {children}
+  </View>
+)
 
 const styles = StyleSheet.create({
   container: {
@@ -25,3 +23,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
+
+export default ScreenContainer
