@@ -6,19 +6,14 @@ import { TouchableIcon } from 'src/shared/components/ui'
 import { noop } from 'src/shared/utils/fn'
 import { formatValue } from '../../utils'
 
-const openMarketModal = (navigation, market) => () =>
-  navigation.navigate('MarketEntryModal', { market })
-
 const MarketListItem = ({
   market,
-  onPress = noop,
-  onLike = noop,
-  navigation
+  navigation,
+  onPress = () => navigation.navigate('MarketEntryModal', { market }),
+  onLike = noop
 }) => (
   <View style={[styles.flexRow, styles.container]}>
-    <TouchableOpacity
-      onPress={onPress !== noop ? onPress : openMarketModal(navigation, market)}
-    >
+    <TouchableOpacity onPress={onPress}>
       <Text style={styles.name}>{market.name}</Text>
     </TouchableOpacity>
     <View style={styles.flexRow}>
