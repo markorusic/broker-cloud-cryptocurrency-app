@@ -1,17 +1,11 @@
-import React, { Component } from 'react'
-import { Container, TextField } from 'src/shared/components/ui'
+import React from 'react'
+import { Container } from 'src/shared/components/ui'
 import MarketList from '../components/MarketList/MarketList'
 
-export default class FavoritesScreen extends Component {
-  static navigationOptions = {
-    title: 'Favorites'
-  }
+const FavoritesScreen = () => (
+  <Container>
+    <MarketList />
+  </Container>
+)
 
-  render() {
-    return (
-      <Container>
-        <MarketList />
-      </Container>
-    )
-  }
-}
+export default FavoritesScreen

@@ -1,13 +1,24 @@
 import React from 'react'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
+import { withNavigation } from 'react-navigation'
 import { GRAY, LIGHT_GRAY, DARK_GRAY } from 'src/config/colors'
 import { TouchableIcon } from 'src/shared/components/ui'
 import { noop } from 'src/shared/utils/fn'
 import { formatValue } from '../../utils'
 
-const MarketListItem = ({ market, onPress = noop, onLike = noop }) => (
+const openMarketModal = (navigation, market) => () =>
+  navigation.navigate('MarketEntryModal', { market })
+
+const MarketListItem = ({
+  market,
+  onPress = noop,
+  onLike = noop,
+  navigation
+}) => (
   <View style={[styles.flexRow, styles.container]}>
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity
+      onPress={onPress !== noop ? onPress : openMarketModal(navigation, market)}
+    >
       <Text style={styles.name}>{market.name}</Text>
     </TouchableOpacity>
     <View style={styles.flexRow}>
@@ -39,4 +50,4 @@ const styles = StyleSheet.create({
     color: GRAY
   }
 })
-export default MarketListItem
+export default withNavigation(MarketListItem)

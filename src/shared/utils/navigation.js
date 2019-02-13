@@ -11,17 +11,28 @@ export const defaultNavigationOptions = {
   headerTintColor: '#fff'
 }
 
+export const StackNavigator = ({ screen, navigationOptions = {} }) =>
+  createStackNavigator(
+    { screen },
+    {
+      defaultNavigationOptions: {
+        ...defaultNavigationOptions,
+        ...navigationOptions
+      }
+    }
+  )
+
 export const tabBarIcon = name => ({ tintColor }) => (
   <Icon name={name} size={25} color={tintColor} />
 )
 
 export const Tab = ({ screen, title, icon }) => ({
-  screen: createStackNavigator(
-    { screen },
-    {
-      defaultNavigationOptions
+  screen: StackNavigator({
+    screen,
+    navigationOptions: {
+      title
     }
-  ),
+  }),
   navigationOptions: {
     tabBarLabel: title,
     tabBarIcon: tabBarIcon(icon)
