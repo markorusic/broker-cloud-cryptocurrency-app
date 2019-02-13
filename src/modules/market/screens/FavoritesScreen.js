@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Container, TextField } from 'src/shared/components/ui'
+import MarketList from '../components/MarketList/MarketList'
 
 export default class FavoritesScreen extends Component {
   static navigationOptions = {
@@ -8,9 +9,9 @@ export default class FavoritesScreen extends Component {
 
   render() {
     return (
-      <View>
-        <Text>Favorites</Text>
-      </View>
+      <Container>
+        <MarketList />
+      </Container>
     )
   }
 }

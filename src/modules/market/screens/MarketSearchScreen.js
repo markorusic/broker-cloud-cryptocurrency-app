@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Container } from 'src/shared/components/ui'
+import { Container, TextField } from 'src/shared/components/ui'
 import MarketList from '../components/MarketList/MarketList'
 
-class MarketSearchScreen extends Component {
+export default class MarketSearchScreen extends Component {
   static navigationOptions = {
     title: 'Market Search'
   }
@@ -10,10 +10,9 @@ class MarketSearchScreen extends Component {
   render() {
     return (
       <Container>
+        <TextField label="Search here" />
         <MarketList />
       </Container>
     )
   }
 }
-
-export default MarketSearchScreen
