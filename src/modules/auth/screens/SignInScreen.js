@@ -1,14 +1,27 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
 import ScreenContainer from 'src/shared/components/ScreenContainer'
 import { TextField, Button } from 'src/shared/components/ui'
+import { login } from '../actions'
 
-export default class SignInScreen extends Component {
+class SignInScreen extends Component {
   static navigationOptions = {
     header: null
   }
 
+  state = {
+    email: '',
+    password: ''
+  }
+
+  submitLogin = () => {
+    const { email, password } = this.state
+    this.props.dispatch(login({ email, password }))
+  }
+
   render() {
+    console.log(this.props)
     return (
       <ScreenContainer style={styles.container}>
         <Text style={styles.heading}>Wellcome</Text>
@@ -16,7 +29,7 @@ export default class SignInScreen extends Component {
           <TextField label="Email" />
           <TextField label="Password" />
         </View>
-        <Button title="Sing in" uppercase />
+        <Button title="Sing in" uppercase onPress={this.submitLogin} />
       </ScreenContainer>
     )
   }
@@ -37,3 +50,11 @@ const styles = StyleSheet.create({
     width: '100%'
   }
 })
+
+const mapStateToProps = ({ auth }) => ({ auth })
+// const mapDispatchToProps = dispatch => ({ mojDispec: dispatch })
+
+export default connect(
+  mapStateToProps
+  // mapDispatchToProps
+)(SignInScreen)
