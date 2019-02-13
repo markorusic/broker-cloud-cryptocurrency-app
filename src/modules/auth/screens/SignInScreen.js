@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
+import to from 'await-to-js'
 import ScreenContainer from 'src/shared/components/ScreenContainer'
 import { TextField, Button } from 'src/shared/components/ui'
 import { login } from '../actions'
@@ -15,13 +16,17 @@ class SignInScreen extends Component {
     password: ''
   }
 
-  submitLogin = () => {
+  submitLogin = async () => {
     const { email, password } = this.state
-    this.props.dispatch(login({ email, password }))
+    const [err] = await to(this.props.dispatch(login({ email, password })))
+    if (err) {
+      alert('Greska prilikom logovanja!')
+    } else {
+      this.props.navigation.navigate('App')
+    }
   }
 
   render() {
-    console.log(this.props)
     return (
       <ScreenContainer style={styles.container}>
         <Text style={styles.heading}>Wellcome</Text>
@@ -29,7 +34,12 @@ class SignInScreen extends Component {
           <TextField label="Email" />
           <TextField label="Password" />
         </View>
-        <Button title="Sing in" uppercase onPress={this.submitLogin} />
+        <Button
+          title="Sing in"
+          uppercase
+          loading={this.props.auth.isAuthenticating}
+          onPress={this.submitLogin}
+        />
       </ScreenContainer>
     )
   }

@@ -26,12 +26,8 @@ export function createAsyncAction(TYPE, asyncFn) {
       dispatch(actionCreators[TYPE_STARTED]({ startedAt, value: { ...args } }))
       const [err, result] = await to(asyncFn(...args, dispatch, getState))
       if (err) {
-        dispatch(
-          actionCreators[TYPE_FAILED]({
-            errorMessage: error.message
-          })
-        )
-        throw error
+        dispatch(actionCreators[TYPE_FAILED](err))
+        throw err
       }
       dispatch(actionCreators[TYPE_SUCCEED](result))
       const endedAt = dayjs()
