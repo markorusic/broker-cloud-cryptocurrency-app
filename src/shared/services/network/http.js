@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BASE_URL } from 'config/params'
+import { BASE_URL } from 'src/config/api'
 
 class HttpClient {
   client = axios.create({

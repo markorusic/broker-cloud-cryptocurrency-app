@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
-import ScreenContainer from 'src/shared/components/ScreenContainer'
-import { Loader } from 'src/shared/components/ui'
+import { loginEffects } from '../utils'
 
 class AuthLoadingScreen extends Component {
   componentDidMount = () => {
@@ -10,14 +9,13 @@ class AuthLoadingScreen extends Component {
 
   bootstrap = () => {
     const { session } = this.props.auth
-    this.props.navigation.navigate(session.access_token ? 'App' : 'Auth')
+    loginEffects({
+      navigation: this.props.navigation,
+      session
+    })
   }
 
-  render = () => (
-    <ScreenContainer centered>
-      <Loader />
-    </ScreenContainer>
-  )
+  render = () => null
 }
 
 const mapStateToProps = ({ auth }) => ({ auth })

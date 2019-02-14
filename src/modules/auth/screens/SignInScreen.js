@@ -5,6 +5,7 @@ import to from 'await-to-js'
 import ScreenContainer from 'src/shared/components/ScreenContainer'
 import { TextField, Button } from 'src/shared/components/ui'
 import { login } from '../actions'
+import { loginEffects } from '../utils'
 
 class SignInScreen extends Component {
   static navigationOptions = {
@@ -18,11 +19,16 @@ class SignInScreen extends Component {
 
   submitLogin = async () => {
     const { email, password } = this.state
-    const [err] = await to(this.props.dispatch(login({ email, password })))
+    const [err, session] = await to(
+      this.props.dispatch(login({ email, password }))
+    )
     if (err) {
       alert('Greska prilikom logovanja!')
     } else {
-      this.props.navigation.navigate('App')
+      loginEffects({
+        session,
+        navigation: this.props.navigation
+      })
     }
   }
 
