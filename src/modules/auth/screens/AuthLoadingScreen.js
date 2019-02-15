@@ -1,23 +1,21 @@
-import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
-import ScreenContainer from 'src/shared/components/ScreenContainer'
-import { Loader } from 'src/shared/components/ui'
+import { Component } from 'react'
+import { connect } from 'react-redux'
+import { loginEffects } from '../utils'
+import { getAuth } from '../selectors'
 
-export default class AuthLoadingScreen extends Component {
+class AuthLoadingScreen extends Component {
   componentDidMount = () => {
-    this.bootstrapAsync()
+    this.bootstrap()
   }
 
-  bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken')
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth')
+  bootstrap = () => {
+    const { auth, navigation } = this.props
+    loginEffects({ navigation, auth })
   }
 
-  render() {
-    return (
-      <ScreenContainer centered>
-        <Loader />
-      </ScreenContainer>
-    )
-  }
+  render = () => null
 }
+
+export default connect(state => ({
+  auth: getAuth(state)
+}))(AuthLoadingScreen)
