@@ -5,7 +5,7 @@ const { AUTH_STARTED, AUTH_FAILED, AUTH_SUCCEED, AUTH_ENDED } = actionTypes
 
 const INITIAL_STATE = {
   session: {},
-  userInfo: {},
+  user: {},
   error: null,
   isAuthenticating: false
 }
@@ -24,7 +24,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
     case AUTH_SUCCEED:
       return merge(state, {
         session: action.payload.session,
-        userInfo: action.payload.userInfo,
+        user: action.payload.user,
         error: null
       })
     case AUTH_ENDED:

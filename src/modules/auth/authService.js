@@ -16,27 +16,31 @@ const self = {
       grant_type: 'password',
       client_id: CLIENT_ID
     })
-    const [err, res] = await to(http.post('oauth/token', body, config))
+    const [err, data] = await to(
+      http.post('oauth/token', body, config).then(async res => {
+        const session = res.data
+        const user = await self.fetchUser(session)
+        return { session, user }
+      })
+    )
     if (err) {
       throw err
     }
-    const session = res.data
-    const [userInfoErr, userInfo] = await to(self.fetchUserInfo(session))
-    if (userInfoErr) {
-      throw userInfoErr
-    }
-    return {
-      session,
-      userInfo
-    }
+    return data
   },
-  fetchUserInfo: session => {
+  fetchUser(session) {
     const config = {
       headers: {
         Authorization: `Bearer ${session.accessToken}`
       }
     }
-    return http.get('users/me', config).then(res => res.data)
+    return http.get('users/me', config).then(res => {
+      const { accounts, ...user } = res.data
+      return {
+        ...user,
+        account: accounts[0]
+      }
+    })
   }
 }
 
