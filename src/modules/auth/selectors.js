@@ -10,3 +10,4 @@ export const getAuth = state => {
     isAuthenticated
   }
 }
+export const getUser = state => state.auth.userInfo
