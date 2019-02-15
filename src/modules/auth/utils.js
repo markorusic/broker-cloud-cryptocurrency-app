@@ -1,10 +1,10 @@
 import lang from 'src/lang'
 import { http } from 'src/shared/services/network'
 
-export const loginEffects = ({ navigation, session }) => {
+export const loginEffects = ({ navigation, auth }) => {
   let nextScreen = 'Auth'
-  if (session && session.accessToken) {
-    http.setHeader('Authorization', `Bearer ${session.accessToken}`)
+  if (auth.isAuthenticated) {
+    http.setHeader('Authorization', `Bearer ${auth.session.accessToken}`)
     nextScreen = 'App'
   }
   navigation.navigate(nextScreen)

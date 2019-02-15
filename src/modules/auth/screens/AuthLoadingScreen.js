@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { loginEffects } from '../utils'
+import { getAuth } from '../selectors'
 
 class AuthLoadingScreen extends Component {
   componentDidMount = () => {
@@ -8,15 +9,13 @@ class AuthLoadingScreen extends Component {
   }
 
   bootstrap = () => {
-    const { session } = this.props.auth
-    loginEffects({
-      navigation: this.props.navigation,
-      session
-    })
+    const { auth, navigation } = this.props
+    loginEffects({ navigation, auth })
   }
 
   render = () => null
 }
 
-const mapStateToProps = ({ auth }) => ({ auth })
-export default connect(mapStateToProps)(AuthLoadingScreen)
+export default connect(state => ({
+  auth: getAuth(state)
+}))(AuthLoadingScreen)

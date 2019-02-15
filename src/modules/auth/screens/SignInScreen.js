@@ -7,6 +7,7 @@ import { ERROR_COLOR } from 'src/config/colors'
 import ScreenContainer from 'src/shared/components/ScreenContainer'
 import { TextField, Button } from 'src/shared/components/ui'
 import { login } from '../actions'
+import { getAuth } from '../selectors'
 import { loginEffects, validateForm } from '../utils'
 
 class SignInScreen extends Component {
@@ -15,8 +16,8 @@ class SignInScreen extends Component {
   }
 
   state = {
-    email: '',
-    password: '',
+    email: 'markousp5@gmail.com',
+    password: 'Marko1234',
     errors: {},
     serverError: null
   }
@@ -34,18 +35,14 @@ class SignInScreen extends Component {
     if (Object.keys(errors).length !== 0) {
       return
     }
-    const [err, session] = await to(
-      this.props.dispatch(login({ email, password }))
-    )
+    const [err] = await to(this.props.dispatch(login({ email, password })))
     if (err) {
       return this.setState({
         serverError: err.response.data.message
       })
     }
-    loginEffects({
-      session,
-      navigation: this.props.navigation
-    })
+    const { auth, navigation } = this.props
+    loginEffects({ auth, navigation })
   }
 
   render() {
@@ -109,6 +106,6 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapStateToProps = ({ auth }) => ({ auth })
-
-export default connect(mapStateToProps)(SignInScreen)
+export default connect(state => ({
+  auth: getAuth(state)
+}))(SignInScreen)
