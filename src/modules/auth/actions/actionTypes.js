@@ -1,3 +1,3 @@
 import { getActionTypes } from 'src/shared/utils/redux'
 
-export default getActionTypes('AUTH')
+export const AUTH = getActionTypes('AUTH')
