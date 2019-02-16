@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ScrollView, Text } from 'react-native'
+import { ScrollView, View, Text, StyleSheet } from 'react-native'
 import { HeaderBackButton, NavigationActions } from 'react-navigation'
 import { Loader, Section, Container } from 'src/shared/components/ui'
+import { formatPrice } from '../utils'
 import MarketNewsList from '../components/MarketNewsList/MarketNewsList'
 import { fetchFullMarket, fetchMarketNews } from '../actions'
 import { getMarketById } from '../selectors'
+import MarketPriceChart from '../components/MarketPriceChart'
 
 const getMarketFromNav = nav => nav.state.params.market
 
@@ -47,9 +49,15 @@ class MarketEntryScreen extends Component {
     }
     return (
       <ScrollView>
+        <View style={styles.topContainer}>
+          <Text style={styles.topContainerTitle}>
+            {formatPrice(market.price.ask)}
+          </Text>
+          <MarketPriceChart data={market.charts} />
+        </View>
         <Container>
           <Section title="About">
-            <Text style={{ fontSize: 16 }}>
+            <Text style={styles.description}>
               {market.instrument.description}
             </Text>
           </Section>
@@ -63,6 +71,21 @@ class MarketEntryScreen extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  topContainer: {
+    paddingTop: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  topContainerTitle: {
+    color: 'black',
+    fontSize: 25
+  },
+  description: {
+    fontSize: 16
+  }
+})
 
 const mapStateToProps = (state, { navigation }) => ({
   market: getMarketById(getMarketFromNav(navigation).id)(state),

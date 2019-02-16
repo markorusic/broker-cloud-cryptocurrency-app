@@ -73,4 +73,3 @@ const marketReducer = (state = INITIAL_STATE, action) => {
 }
 
 export default marketReducer
-2

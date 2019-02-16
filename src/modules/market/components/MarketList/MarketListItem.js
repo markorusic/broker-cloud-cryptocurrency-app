@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { GRAY, LIGHT_GRAY, DARK_GRAY, LIKE_COLOR } from 'src/config/colors'
 import { TouchableIcon } from 'src/shared/components/ui'
 import { noop } from 'src/shared/utils/fn'
-import { formatValue } from '../../utils'
+import { formatPrice } from '../../utils'
 
 const MarketListItem = ({
   market,
@@ -18,7 +18,7 @@ const MarketListItem = ({
     </TouchableOpacity>
     <View style={styles.flexRow}>
       <Text style={styles.price}>
-        {market.price && formatValue(market.price.ask)}
+        {market.price && formatPrice(market.price.ask)}
       </Text>
       <TouchableIcon
         name={market.following ? 'heart' : 'heart-outline'}

@@ -27,7 +27,6 @@ export function createAsyncAction(TYPE, asyncFn) {
       const [err, result] = await to(asyncFn(...args, dispatch, getState))
       if (err) {
         dispatch(actionCreators[TYPE_FAILED](err))
-        console.log(err.response.data.message)
         throw err
       }
       dispatch(actionCreators[TYPE_SUCCEED](result))

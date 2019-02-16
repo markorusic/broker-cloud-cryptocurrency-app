@@ -1,4 +1,4 @@
-export const formatValue = (number = 0) => {
+export const formatPrice = (number = 0) => {
   let [integerPart, fractionalPart = ''] = number.toString().split('.')
   while (fractionalPart.length < 2) {
     fractionalPart += '0'
