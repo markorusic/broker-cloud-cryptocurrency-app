@@ -3,6 +3,11 @@ import { APPLICATION_ID } from 'src/config/api'
 import { http } from 'src/shared/services/network'
 import { getData, isIn, groupBy } from 'src/shared/utils'
 
+const getMarketNewsData = marketId => res => ({
+  ...res.data,
+  marketId
+})
+
 const self = {
   async fetchMarkets(user) {
     const [err, data] = await to(
@@ -15,14 +20,14 @@ const self = {
       throw err
     }
     const [markets, watchlistMarkets] = data
-    const combinedMarkets = markets.map(market => ({
+    const marketsWithFollowing = markets.map(market => ({
       ...market,
       following: isIn({
         item: market,
         items: watchlistMarkets
       })
     }))
-    return groupBy(combinedMarkets, 'id')
+    return groupBy(marketsWithFollowing, 'id')
   },
   addMarketToWatchlist({ user, payload }) {
     const { following, market } = payload
@@ -35,27 +40,34 @@ const self = {
         following
       }))
   },
-  async fetchMarket({ user, marketId }) {
-    const market = await http
-      .get(`users/${user.id}/markets/${marketId}`)
-      .then(getData)
-    const [news, charts] = await Promise.all([
-      self.fetchMarketNews({ market }),
-      self.fetchMarketCharts({ user, market })
-    ])
-    return { ...market, news, charts }
+  async fetchMarket({ user, market }) {
+    const [err, data] = await to(
+      Promise.all([
+        http.get(`users/${user.id}/markets/${market.id}`).then(getData),
+        self.fetchMarketNews({ market }),
+        self.fetchMarketCharts({ user, market })
+      ])
+    )
+    if (err) {
+      throw err
+    }
+    const [fullMarket, news, charts] = data
+    return {
+      ...fullMarket,
+      ...market,
+      news,
+      charts
+    }
   },
   fetchMarketNews({ market, offset = 0 }) {
     const params = {
       limit: 5,
       offset,
-      tags: market.instrumentId
+      tags: market.instrumentId.toLowerCase()
     }
     return http
-      .get(`applications/${APPLICATION_ID}/news/coinpulse`, {
-        params
-      })
-      .then(getData)
+      .get(`applications/${APPLICATION_ID}/news/coinpulse`, { params })
+      .then(getMarketNewsData(market.id))
   },
   fetchMarketCharts({ user, market }) {
     return http

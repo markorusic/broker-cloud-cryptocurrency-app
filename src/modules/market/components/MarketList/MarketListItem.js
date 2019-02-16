@@ -17,7 +17,9 @@ const MarketListItem = ({
       <Text style={styles.name}>{market.name}</Text>
     </TouchableOpacity>
     <View style={styles.flexRow}>
-      <Text style={styles.price}>{formatValue(market.volume)}</Text>
+      <Text style={styles.price}>
+        {market.price && formatValue(market.price.ask)}
+      </Text>
       <TouchableIcon
         name={market.following ? 'heart' : 'heart-outline'}
         color={market.following ? LIKE_COLOR : GRAY}

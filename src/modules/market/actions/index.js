@@ -1,5 +1,6 @@
 import { createAsyncAction } from 'src/shared/utils/redux'
 import { getUser } from 'src/modules/auth/selectors'
+import { getMarketById } from '../selectors'
 import marketService from '../marketService'
 
 export const fetchMarkets = createAsyncAction(
@@ -20,16 +21,17 @@ export const addMarketToWatchlist = createAsyncAction(
 
 export const fetchFullMarket = createAsyncAction(
   'FETCH_FULL_MARKET',
-  (marketId, dispatch, getState) => {
+  (market, dispatch, getState) => {
     const user = getUser(getState())
-    return marketService.fetchMarket({ user, marketId })
+    return marketService.fetchMarket({ user, market })
   }
 )
 
 export const fetchMarketNews = createAsyncAction(
   'FETCH_MARKET_NEWS',
-  (payload, dispatch, getState) => {
-    const user = getUser(getState())
-    return marketService.fetchMarketNews({ user, payload })
+  market => {
+    const fullMarket = getMarketById(market.id)
+    const offset = fullMarket.news.count - fullMarket.news.results.length
+    return marketService.fetchMarketNews({ market, offset })
   }
 )
