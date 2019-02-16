@@ -1,18 +1,30 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, Dimensions } from 'react-native'
 import { keyExtractor } from 'src/shared/utils'
+import { noop } from 'src/shared/utils/fn'
 import MarketListItem from './MarketListItem'
-import { markets as mockupMarkets } from '../../mockup'
 
-const renderItem = ({ item }) => <MarketListItem market={item} />
+const renderItem = onFollow => ({ item }) => (
+  <MarketListItem market={item} onFollow={onFollow} />
+)
 
-const MarketList = ({ markets = mockupMarkets, ...props }) => (
+const baseContentCotainerStyle = {
+  minHeight: Dimensions.get('window').height
+}
+
+const MarketList = ({
+  markets,
+  onFollow = noop,
+  contentContainerStyle = {},
+  ...props
+}) => (
   <FlatList
     data={markets}
     keyExtractor={keyExtractor}
-    renderItem={renderItem}
+    renderItem={renderItem(onFollow)}
     showsVerticalScrollIndicator={false}
     {...props}
+    contentContainerStyle={[contentContainerStyle, baseContentCotainerStyle]}
   />
 )
 

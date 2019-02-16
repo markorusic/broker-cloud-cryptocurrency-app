@@ -4,9 +4,11 @@ import { createLogger } from 'redux-logger'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import authReducer from './modules/auth/reducer'
+import marketReducer from './modules/market/reducer'
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  market: marketReducer
 })
 
 const middlewares = [thunkMiddleware]
