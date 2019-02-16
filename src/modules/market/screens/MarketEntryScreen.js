@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, Text } from 'react-native'
 import { HeaderBackButton, NavigationActions } from 'react-navigation'
-import { Loader } from 'src/shared/components/ui'
+import { Loader, Section, Container } from 'src/shared/components/ui'
+import MarketNewsList from '../components/MarketNewsList/MarketNewsList'
 import { fetchFullMarket, fetchMarketNews } from '../actions'
 import { getMarketById } from '../selectors'
 
@@ -21,12 +22,21 @@ class MarketEntryScreen extends Component {
     )
   })
 
+  state = {
+    started: false
+  }
+
   componentDidMount = () => {
     this.props.fetchMarket()
+    this.setState({ started: true })
   }
 
   render() {
-    const { loading, error, market } = this.props
+    const { loading, error, market, fetchNews } = this.props
+    const { started } = this.state
+    if (!started) {
+      return null
+    }
     if (loading) {
       return <Loader />
     }
@@ -37,7 +47,18 @@ class MarketEntryScreen extends Component {
     }
     return (
       <ScrollView>
-        <Text>{JSON.stringify(market, null, 2)}</Text>
+        <Container>
+          <Section title="About">
+            <Text style={{ fontSize: 16 }}>
+              {market.instrument.description}
+            </Text>
+          </Section>
+          <MarketNewsList
+            news={market.news.results}
+            loadMore={fetchNews}
+            showLoadMore={market.news.count > market.news.results.length}
+          />
+        </Container>
       </ScrollView>
     )
   }

@@ -29,8 +29,8 @@ export const fetchFullMarket = createAsyncAction(
 
 export const fetchMarketNews = createAsyncAction(
   'FETCH_MARKET_NEWS',
-  market => {
-    const fullMarket = getMarketById(market.id)
+  (market, dispatch, getState) => {
+    const fullMarket = getMarketById(market.id)(getState())
     const offset = fullMarket.news.count - fullMarket.news.results.length
     return marketService.fetchMarketNews({ market, offset })
   }

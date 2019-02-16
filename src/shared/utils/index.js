@@ -1,6 +1,6 @@
 export const uppercase = str => str && str.toUpperCase()
 export const get = key => item => item[key]
-export const keyExtractor = get('id')
+export const keyExtractor = item => item.id.toString()
 export const getData = get('data')
 export const groupBy = (items, key) =>
   items.reduce((acc, current) => {

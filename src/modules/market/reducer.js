@@ -61,10 +61,10 @@ const marketReducer = (state = INITIAL_STATE, action) => {
       const { marketId, ...news } = action.payload
       const market = state.markets[marketId]
       market.news = merge(news, {
-        results: merge(market.news.results, news.results)
+        results: [...market.news.results, ...news.results]
       })
       const markets = merge(state.markets, {})
-      markets[marketId] = market
+      markets[marketId] = merge(market, {})
       return merge(state, { markets })
     }
     default:
@@ -73,3 +73,4 @@ const marketReducer = (state = INITIAL_STATE, action) => {
 }
 
 export default marketReducer
+2
