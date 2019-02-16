@@ -3,8 +3,8 @@ export const get = key => item => item[key]
 export const keyExtractor = get('id')
 export const getData = get('data')
 export const groupBy = (items, key) =>
-  items.reduce(function(acc, current) {
-    ;(acc[current[key]] = acc[current[key]] || []).push(current)
+  items.reduce((acc, current) => {
+    acc[current[key]] = current
     return acc
   }, {})
 export const isIn = ({ item, items, key = 'id' }) =>

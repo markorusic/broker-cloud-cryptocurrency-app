@@ -23,7 +23,7 @@ export function createAsyncAction(TYPE, asyncFn) {
   function create(...args) {
     return async (dispatch, getState) => {
       const startedAt = dayjs()
-      dispatch(actionCreators[TYPE_STARTED]({ startedAt, value: { ...args } }))
+      dispatch(actionCreators[TYPE_STARTED]({ startedAt, ...args }))
       const [err, result] = await to(asyncFn(...args, dispatch, getState))
       if (err) {
         dispatch(actionCreators[TYPE_FAILED](err))
