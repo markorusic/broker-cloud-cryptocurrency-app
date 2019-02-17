@@ -16,8 +16,8 @@ class SignInScreen extends Component {
   }
 
   state = {
-    email: 'markousp5@gmail.com',
-    password: 'Marko1234',
+    email: this.props.auth.credentials.email,
+    password: this.props.auth.credentials.password,
     errors: {},
     serverError: null
   }
