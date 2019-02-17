@@ -2,11 +2,28 @@ import React from 'react'
 import { View, TextInput, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { LIGHT_GRAY, GRAY } from 'src/config/colors'
+import { noop } from 'src/shared/utils'
+import { TouchableIcon } from './TouchableIcon'
 
-export const TextFieldIcon = ({ icon, style = {}, ...props }) => (
+export const TextFieldIcon = ({
+  icon,
+  onReset = noop,
+  value,
+  style = {},
+  ...props
+}) => (
   <View style={styles.searchSection}>
-    <Icon style={styles.searchIcon} name={icon} size={23} color={GRAY} />
-    <TextInput style={[styles.input, style]} {...props} />
+    <Icon style={styles.icon} name={icon} size={23} color={GRAY} />
+    <TextInput style={[styles.input, style]} value={value} {...props} />
+    {!!value && (
+      <TouchableIcon
+        style={styles.icon}
+        name="close"
+        size={23}
+        color={GRAY}
+        onPress={onReset}
+      />
+    )}
   </View>
 )
 
@@ -19,7 +36,7 @@ const styles = StyleSheet.create({
     borderColor: LIGHT_GRAY,
     borderWidth: 1
   },
-  searchIcon: {
+  icon: {
     padding: 12
   },
   input: {

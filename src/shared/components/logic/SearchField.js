@@ -8,6 +8,8 @@ export class SearchField extends Component {
 
   onChangeText = searchText => this.setState({ searchText })
 
+  clearSearch = () => this.setState({ searchText: '' })
+
   filteredItems = () => {
     const { items, searchBy, enabled } = this.props
     const { searchText } = this.state
@@ -26,7 +28,12 @@ export class SearchField extends Component {
     return (
       <Fragment>
         {enabled && (
-          <TextFieldIcon {...props} onChangeText={this.onChangeText} />
+          <TextFieldIcon
+            {...props}
+            value={this.state.searchText}
+            onChangeText={this.onChangeText}
+            onReset={this.clearSearch}
+          />
         )}
         {children(this.filteredItems())}
       </Fragment>
