@@ -8,7 +8,7 @@ $ git clone https://github.com/markorusic/broker-cloud-cryptocurrency-app
 $  cd broker-cloud-cryptocurrency-app && npm i && npm start
 ```
 
-Make sure you have connected phone or emulator
+Make sure you have connected phone or emulator, open new terminal window or tab and run
 
 ```sh
 $  ./run.sh
