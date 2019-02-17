@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import ScreenContainer from 'src/shared/components/ScreenContainer'
-import { Loader } from 'src/shared/components/ui'
+import LoadingScreen from './shared/components/LoadingScreen'
 import http, { httpEventTypes } from './shared/services/network/http'
 import { logout } from './modules/auth/actions'
 import { getAuth } from './modules/auth/selectors'
@@ -13,11 +12,7 @@ import AppContainer from './configureNavigation'
 import configureStore from './configureStore'
 
 const { store, persistor } = configureStore()
-const loading = (
-  <ScreenContainer centered>
-    <Loader />
-  </ScreenContainer>
-)
+const loading = LoadingScreen()
 
 export default class App extends Component {
   removeUnautorizedListener = noop

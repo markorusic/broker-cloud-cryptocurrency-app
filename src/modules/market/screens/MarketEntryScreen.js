@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, View, Text, StyleSheet } from 'react-native'
 import { HeaderBackButton, NavigationActions } from 'react-navigation'
-import { Loader, Section, Container } from 'src/shared/components/ui'
+import LoadingScreen from 'src//shared/components/LoadingScreen'
 import lang from 'src/lang'
+import { Section, Container } from 'src/shared/components/ui'
+import { ERROR_COLOR } from 'src/config/colors'
 import { formatPrice } from '../utils'
 import MarketNewsList from '../components/MarketNewsList/MarketNewsList'
 import { fetchFullMarket, fetchMarketNews } from '../actions'
@@ -41,12 +43,10 @@ class MarketEntryScreen extends Component {
       return null
     }
     if (loading) {
-      return <Loader />
+      return <LoadingScreen />
     }
     if (error) {
-      return (
-        <Text style={{ color: 'red' }}>{JSON.stringify(error, null, 2)}</Text>
-      )
+      return <Text style={styles.error}>{error.response.data.message}</Text>
     }
     return (
       <ScrollView>
@@ -85,6 +85,10 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16
+  },
+  error: {
+    color: ERROR_COLOR,
+    marginTop: 20
   }
 })
 
