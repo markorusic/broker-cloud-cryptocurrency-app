@@ -1,5 +1,6 @@
 import React from 'react'
 import { FlatList, Dimensions } from 'react-native'
+import lang from 'src/lang'
 import { SearchField } from 'src/shared/components/logic'
 import { keyExtractor } from 'src/shared/utils'
 import { noop } from 'src/shared/utils/fn'
@@ -25,7 +26,7 @@ const MarketList = ({
     enabled={enableSearch}
     searchBy="name"
     icon="search"
-    placeholder="Search here"
+    placeholder={lang('Search here')}
   >
     {filteredMarkets => (
       <FlatList

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { ScrollView, View, Text, StyleSheet } from 'react-native'
 import { HeaderBackButton, NavigationActions } from 'react-navigation'
 import { Loader, Section, Container } from 'src/shared/components/ui'
+import lang from 'src/lang'
 import { formatPrice } from '../utils'
 import MarketNewsList from '../components/MarketNewsList/MarketNewsList'
 import { fetchFullMarket, fetchMarketNews } from '../actions'
@@ -56,7 +57,7 @@ class MarketEntryScreen extends Component {
           <MarketPriceChart data={market.charts} />
         </View>
         <Container>
-          <Section title="About">
+          <Section title={lang('About')}>
             <Text style={styles.description}>
               {market.instrument.description}
             </Text>

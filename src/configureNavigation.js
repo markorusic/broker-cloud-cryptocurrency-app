@@ -3,6 +3,7 @@ import {
   createStackNavigator,
   createAppContainer
 } from 'react-navigation'
+import lang from './lang'
 import { Tab, Tabs, StackNavigator } from 'src/shared/utils/navigation'
 import AuthLoadingScreen from './modules/auth/screens/AuthLoadingScreen'
 import SignInScreen from './modules/auth/screens/SignInScreen'
@@ -15,12 +16,12 @@ const AuthStack = createStackNavigator({ SignIn: SignInScreen })
 const TabStack = Tabs({
   Search: Tab({
     screen: MarketSearchScreen,
-    title: 'Market Search',
+    title: lang('Market Search'),
     icon: 'view-list'
   }),
   Favorites: Tab({
     screen: FavoritesScreen,
-    title: 'Favorites',
+    title: lang('Favorites'),
     icon: 'heart'
   })
 })

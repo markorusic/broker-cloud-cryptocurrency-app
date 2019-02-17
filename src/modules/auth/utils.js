@@ -19,13 +19,13 @@ export const validateForm = ({ email, password }) => {
   const errors = {}
 
   if (!email) {
-    errors.email = lang('auth.emailRequired')
+    errors.email = lang('E-mail is required')
   } else if (!validateEmail(email)) {
-    errors.email = lang('auth.invalidEmail')
+    errors.email = lang('E-mail is invalid')
   }
 
   if (!password) {
-    errors.password = lang('auth.passwordRequired')
+    errors.password = lang('Password is required')
   }
   return errors
 }

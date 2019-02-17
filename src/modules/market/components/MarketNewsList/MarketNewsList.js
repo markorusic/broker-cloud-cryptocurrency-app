@@ -1,5 +1,6 @@
 import React from 'react'
 import { FlatList, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import lang from 'src/lang'
 import { PRIMARY_COLOR } from 'src/config/colors'
 import { keyExtractor } from 'src/shared/utils'
 import { Section } from 'src/shared/components/ui'
@@ -10,7 +11,7 @@ const renderItem = ({ item, index }) => (
 )
 
 const MarketNewsList = ({ news, showLoadMore = false, loadMore, ...props }) => (
-  <Section title="News">
+  <Section title={lang('News')}>
     <FlatList
       data={news}
       keyExtractor={keyExtractor}
@@ -20,7 +21,9 @@ const MarketNewsList = ({ news, showLoadMore = false, loadMore, ...props }) => (
     />
     {loadMore && showLoadMore && (
       <TouchableOpacity style={styles.showMore} onPress={loadMore}>
-        <Text style={styles.showMoreTitle}>SHOW MORE</Text>
+        <Text style={styles.showMoreTitle}>
+          {lang('Show more').toUpperCase()}
+        </Text>
       </TouchableOpacity>
     )}
   </Section>

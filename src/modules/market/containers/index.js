@@ -1,4 +1,5 @@
 import Snackbar from 'react-native-snackbar'
+import lang from 'src/lang'
 import { fetchMarkets, addMarketToWatchlist } from '../actions'
 import { getMarkets } from '../selectors'
 
@@ -14,8 +15,8 @@ export const mapDispatchToProps = dispatch => ({
     const { following } = payload
     Snackbar.show({
       title: following
-        ? 'Successfully added to favorites'
-        : 'Successfully removed from favorites'
+        ? lang('Successfully added to favorites')
+        : lang('Successfully removed from favorites')
     })
     return dispatch(addMarketToWatchlist(payload))
   }

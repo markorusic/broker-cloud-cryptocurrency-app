@@ -49,11 +49,11 @@ class SignInScreen extends Component {
     const { email, password, errors, serverError } = this.state
     return (
       <ScreenContainer style={styles.container}>
-        <Text style={styles.heading}>{lang('auth.wellcome')}</Text>
+        <Text style={styles.heading}>{lang('Wellcome')}</Text>
         <View style={styles.fullWidth}>
           <TextField
             value={email}
-            label={lang('commons.email')}
+            label={lang('Email')}
             onChangeText={this.onChangeText('email')}
             error={errors.email}
             errorIndicator={serverError}
@@ -61,7 +61,7 @@ class SignInScreen extends Component {
           <TextField
             secureTextEntry
             value={password}
-            label={lang('commons.password')}
+            label={lang('Password')}
             onChangeText={this.onChangeText('password')}
             autoComplete="password"
             error={errors.password}
@@ -71,7 +71,7 @@ class SignInScreen extends Component {
         <View style={styles.submitButtonWrapper}>
           {serverError && <Text style={styles.errorText}>{serverError}</Text>}
           <Button
-            title={lang('auth.signIn')}
+            title={lang('Sign in')}
             uppercase
             loading={this.props.auth.isAuthenticating}
             onPress={this.submitLogin}
