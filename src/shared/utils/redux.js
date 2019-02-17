@@ -3,10 +3,10 @@ import dayjs from 'dayjs'
 import { createAction } from 'redux-actions'
 
 export const getActionTypes = TYPE => ({
-  [TYPE + '_STARTED']: TYPE + '_STARTED',
-  [TYPE + '_FAILED']: TYPE + '_FAILED',
-  [TYPE + '_SUCCEED']: TYPE + '_SUCCEED',
-  [TYPE + '_ENDED']: TYPE + '_ENDED'
+  STARTED: `${TYPE}_STARTED`,
+  FAILED: `${TYPE}_FAILED`,
+  SUCCEED: `${TYPE}_SUCCEED`,
+  ENDED: `${TYPE}_ENDED`
 })
 
 export function createAsyncAction(TYPE, asyncFn) {
@@ -23,7 +23,7 @@ export function createAsyncAction(TYPE, asyncFn) {
   function create(...args) {
     return async (dispatch, getState) => {
       const startedAt = dayjs()
-      dispatch(actionCreators[TYPE_STARTED]({ startedAt, value: { ...args } }))
+      dispatch(actionCreators[TYPE_STARTED]({ startedAt, ...args }))
       const [err, result] = await to(asyncFn(...args, dispatch, getState))
       if (err) {
         dispatch(actionCreators[TYPE_FAILED](err))

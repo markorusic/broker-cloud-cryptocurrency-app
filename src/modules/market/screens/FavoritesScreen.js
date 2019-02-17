@@ -1,10 +1,10 @@
 import React from 'react'
 import { Container } from 'src/shared/components/ui'
-import MarketList from '../components/MarketList/MarketList'
+import FavoritesMarketListContainer from '../containers/FavoritesMarketList'
 
 const FavoritesScreen = () => (
   <Container>
-    <MarketList />
+    <FavoritesMarketListContainer />
   </Container>
 )
 

@@ -1,24 +1,35 @@
 import React from 'react'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 import { withNavigation } from 'react-navigation'
-import { GRAY, LIGHT_GRAY, DARK_GRAY } from 'src/config/colors'
+import { GRAY, LIGHT_GRAY, DARK_GRAY, LIKE_COLOR } from 'src/config/colors'
 import { TouchableIcon } from 'src/shared/components/ui'
 import { noop } from 'src/shared/utils/fn'
-import { formatValue } from '../../utils'
+import { formatPrice } from '../../utils'
 
 const MarketListItem = ({
   market,
   navigation,
   onPress = () => navigation.navigate('MarketEntryModal', { market }),
-  onLike = noop
+  onFollow = noop
 }) => (
   <View style={[styles.flexRow, styles.container]}>
     <TouchableOpacity onPress={onPress}>
       <Text style={styles.name}>{market.name}</Text>
     </TouchableOpacity>
     <View style={styles.flexRow}>
-      <Text style={styles.price}>{formatValue(market.volume)}</Text>
-      <TouchableIcon name="heart-outline" color={GRAY} onPress={onLike} />
+      <Text style={styles.price}>
+        {market.price && formatPrice(market.price.ask)}
+      </Text>
+      <TouchableIcon
+        name={market.following ? 'heart' : 'heart-outline'}
+        color={market.following ? LIKE_COLOR : GRAY}
+        onPress={() => {
+          onFollow({
+            market,
+            following: !market.following
+          })
+        }}
+      />
     </View>
   </View>
 )

@@ -1,11 +1,10 @@
 import React from 'react'
-import { Container, TextField } from 'src/shared/components/ui'
-import MarketList from '../components/MarketList/MarketList'
+import { Container } from 'src/shared/components/ui'
+import MarketListContainer from '../containers/MarketList'
 
 const MarketSearchScreen = () => (
   <Container>
-    <TextField label="Search here" />
-    <MarketList />
+    <MarketListContainer enableSearch />
   </Container>
 )
 
