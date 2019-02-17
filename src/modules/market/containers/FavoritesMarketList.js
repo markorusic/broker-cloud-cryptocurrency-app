@@ -1,17 +1,14 @@
 import { connect } from 'react-redux'
 import MarketList from '../components/MarketList/MarketList'
-import { fetchMarkets, addMarketToWatchlist } from '../actions'
+import {
+  mapStateToProps as baseMapStateToProps,
+  mapDispatchToProps
+} from './index'
 import { getFavorites } from '../selectors'
 
 const mapStateToProps = state => ({
-  markets: getFavorites(state),
-  refreshing: state.market.marketsLoading,
-  marketsLoadingError: state.market.marketsLoadingError
-})
-
-const mapDispatchToProps = dispatch => ({
-  onRefresh: () => dispatch(fetchMarkets()),
-  onFollow: (...args) => dispatch(addMarketToWatchlist(...args))
+  ...baseMapStateToProps(state),
+  markets: getFavorites(state)
 })
 
 export default connect(

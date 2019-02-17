@@ -1,5 +1,4 @@
 import { merge } from 'src/shared/utils'
-// import { getMarkets } from './selectors'
 import {
   FETCH_MARKETS,
   ADD_MARKET_WATCHLIST,
